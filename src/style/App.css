@@ -4,17 +4,18 @@
   box-sizing: border-box;
 }
 
-body {
+#root {
   width: 100vw;
   height: 100vh;
-  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #list-container {
-  /*width: 100%;*/
-  /*max-width: 400px;*/
-  /*height: 100%;*/
-  /*max-height: 400px;*/
-
-  /*background-color: red;*/
+  max-width: calc(600px + 2.5em);
+  margin: 0 auto;
+  border-radius: 1em;
+  box-shadow: 0 0 20px lightgray;
+  padding: .75em;
 }

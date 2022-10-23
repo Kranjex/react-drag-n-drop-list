@@ -1,36 +1,17 @@
-import DragElement from './components/DragElement';
-import "./style/App.css"
+import DragElement, { DataType } from "./components/DragElement";
+import "./style/App.css";
+
+const data: DataType[] = [
+  { title: "Group 1", items: ["Item 1", "Item 2", "Item 3"] },
+  { title: "Group 2", items: ["Item 4", "Item 5"] },
+];
 
 function App() {
-
   return (
     <div id="list-container">
-        <DragElement />
-        {/*<div className="drag-n-drop">*/}
-        {/*    <div className="dnd-group">*/}
-        {/*        <div className="dnd-group-title">Group 1</div>*/}
-        {/*        <div className="dnd-item">*/}
-        {/*            <p>Item 1</p>*/}
-        {/*        </div>*/}
-        {/*        <div className="dnd-item">*/}
-        {/*            <p>Item 2</p>*/}
-        {/*        </div>*/}
-        {/*        <div className="dnd-item">*/}
-        {/*            <p>Item 3</p>*/}
-        {/*        </div>*/}
-        {/*    </div>*/}
-        {/*    <div className="dnd-group">*/}
-        {/*        <div className="dnd-group-title">Group 2</div>*/}
-        {/*        <div className="dnd-item">*/}
-        {/*            <p>Item 4</p>*/}
-        {/*        </div>*/}
-        {/*        <div className="dnd-item">*/}
-        {/*            <p>Item 5</p>*/}
-        {/*        </div>*/}
-        {/*    </div>*/}
-        {/*</div>*/}
+      <DragElement data={data} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

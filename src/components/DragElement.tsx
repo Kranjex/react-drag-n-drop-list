@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import styles from "../style/DragElement.module.css";
 
-type DataType = {
+export type DataType = {
   title: string;
   items: string[];
 };
@@ -11,12 +11,11 @@ type DragParams = {
   itemIndex: number;
 };
 
-const data: DataType[] = [
-  { title: "Group 1", items: ["Item 1", "Item 2", "Item 3"] },
-  { title: "Group 2", items: ["Item 4", "Item 5"] },
-];
+type DragElementProps = {
+  data: DataType[];
+};
 
-export default function DragElement() {
+export default function DragElement({ data }: DragElementProps) {
   const [list, setList] = useState(data);
   const [dragging, setDragging] = useState(false);
 
@@ -26,7 +25,7 @@ export default function DragElement() {
   const handleDragStart = (e: DragEvent, params: DragParams) => {
     dragItem.current = params;
     dragElement.current = e.target;
-    dragElement.current.addEventListener("dragend", handleDragEnd);
+    dragElement.current?.addEventListener("dragend", handleDragEnd);
 
     setTimeout(() => {
       setDragging(true);
@@ -38,7 +37,6 @@ export default function DragElement() {
 
     if (e.target !== dragElement.current) {
       setList((prev) => {
-        // let newList = [...prev];
         let newList = JSON.parse(JSON.stringify(prev));
         newList[params.groupIndex].items.splice(
           params.itemIndex,
@@ -59,6 +57,10 @@ export default function DragElement() {
     dragElement.current?.removeEventListener("dragend", handleDragEnd);
     dragItem.current = null;
     dragElement.current = null;
+  };
+
+  const handleDragOver = (e: DragEvent) => {
+    e.preventDefault();
   };
 
   const getStyles = ({ groupIndex, itemIndex }: DragParams) => {
@@ -86,6 +88,7 @@ export default function DragElement() {
               ? (e) => handleDragEnter(e, { groupIndex, itemIndex: 0 })
               : () => {}
           }
+          onDragOver={(e) => handleDragOver(e)}
         >
           <div className={styles["group-title"]}>{group.title}</div>
           {group.items.map((item, itemIndex) => (
@@ -102,7 +105,7 @@ export default function DragElement() {
               }
               key={item}
             >
-              {item}
+              <span>&#8759;</span> {item}
             </div>
           ))}
         </div>
